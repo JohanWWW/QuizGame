@@ -7,10 +7,20 @@ import java.util.List;
 public class QuizProvider {
     private final IQuizApiController controller;
 
+    /**
+     * @param controller the quiz api controller to use
+     */
     public QuizProvider(IQuizApiController controller) {
         this.controller = controller;
     }
 
+    /**
+     * @param amount the amount of quizzes to get
+     * @param category the category of the questions
+     * @param type
+     * @return an array of quizzes
+     * @throws Exception
+     */
     public Quiz[] getQuizzes(int amount, int category, String type) throws Exception {
         QuizRootResponseModel responseModel = controller.getQuizzes(amount, category, type);
 

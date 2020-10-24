@@ -9,13 +9,24 @@ import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
 
-public class QuizApiController implements IQuizApiController{
+/**
+ * Controller for fetching quizzes from server
+ */
+public class QuizApiController implements IQuizApiController {
     private final HttpClient client;
 
     public QuizApiController() {
         client = HttpClient.newHttpClient();
     }
 
+    /**
+     * Fetches quizzes from server
+     * @param amount amount of quizzes
+     * @param category the category of the question
+     * @param type
+     * @return Quiz root dto
+     * @throws Exception if request failed, if failed to parse json
+     */
     public QuizRootResponseModel getQuizzes(int amount, int category, String type) throws Exception {
         HttpRequest request = HttpRequest.newBuilder()
                 .uri(URI.create(String.format("https://opentdb.com/api.php?amount=%s&category=%s&type=%s", amount, category, type)))

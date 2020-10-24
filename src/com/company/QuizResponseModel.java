@@ -2,6 +2,9 @@ package com.company;
 
 import com.google.gson.annotations.SerializedName;
 
+/**
+ * The quiz response dto
+ */
 public class QuizResponseModel {
     private String category;
     private String type;
