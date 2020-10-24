@@ -23,7 +23,7 @@ public class QuizApiController implements IQuizApiController {
      */
     public QuizRootDto getQuizzes(int amount, int category) throws HttpRequestException, HttpResponseNotOkException {
         HttpRequest request = HttpRequest.newBuilder()
-                .uri(URI.create(String.format("https://opentdb.com/api.php?amount=%s&category=%s&type=multiple", amount, category)))
+                .uri(URI.create(String.format("https://opentdb.com/api.php?amount=%s&category=%s&type=multiple&encode=url3986", amount, category)))
                 .GET()
                 .build();
 
