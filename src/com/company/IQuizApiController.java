@@ -1,5 +1,5 @@
 package com.company;
 
 public interface IQuizApiController {
-    QuizRootDto getQuizzes(int amount, int category) throws Exception;
+    QuizRootDto getQuizzes(int amount, int category) throws HttpRequestException, HttpResponseNotOkException;
 }

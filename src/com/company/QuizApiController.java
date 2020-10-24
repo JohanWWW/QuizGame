@@ -2,6 +2,8 @@ package com.company;
 
 import com.google.gson.Gson;
 
+import java.io.IOException;
+import java.io.SyncFailedException;
 import java.net.URI;
 import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
@@ -24,16 +26,23 @@ public class QuizApiController implements IQuizApiController {
      * @return Quiz root dto
      * @throws Exception if request failed, if failed to parse json
      */
-    public QuizRootDto getQuizzes(int amount, int category) throws Exception {
+    public QuizRootDto getQuizzes(int amount, int category) throws HttpRequestException, HttpResponseNotOkException {
         HttpRequest request = HttpRequest.newBuilder()
                 .uri(URI.create(String.format("https://opentdb.com/api.php?amount=%s&category=%s&type=multiple", amount, category)))
                 .GET()
                 .build();
 
-        HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
+        HttpResponse<String> response = null;
+        try {
+            response = client.send(request, HttpResponse.BodyHandlers.ofString());
+        } catch (IOException e) {
+            throw new HttpRequestException("An error occurred when sending or receiving", e);
+        } catch (InterruptedException e) {
+            throw new HttpRequestException("The request was interrupted", e);
+        }
 
         if (response.statusCode() != 200) {
-            throw new Exception("Status code was other than '200' (OK)");
+            throw new HttpResponseNotOkException(response.statusCode());
         }
 
         return deserializeJson(response.body());

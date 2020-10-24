@@ -20,8 +20,13 @@ public class QuizProvider {
      * @return an array of quizzes
      * @throws Exception
      */
-    public Quiz[] getQuizzes(int amount, int category) throws Exception {
-        QuizRootDto responseModel = controller.getQuizzes(amount, category);
+    public Quiz[] getQuizzes(int amount, int category) throws QuizProviderFailedException {
+        QuizRootDto responseModel;
+        try {
+            responseModel = controller.getQuizzes(amount, category);
+        } catch (HttpRequestException | HttpResponseNotOkException e) {
+            throw new QuizProviderFailedException(e.getMessage(), e);
+        }
 
         List<Quiz> mappedQuizzes = new ArrayList<>();
         for (QuizDto quizDto: responseModel.getResults()) {
