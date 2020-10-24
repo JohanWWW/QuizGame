@@ -8,7 +8,7 @@ public class QuizProvider {
     private final IQuizApiController controller;
 
     /**
-     * @param controller the quiz api controller to use
+     * @param controller the controller that the provider should use
      */
     public QuizProvider(IQuizApiController controller) {
         this.controller = controller;
@@ -17,7 +17,6 @@ public class QuizProvider {
     /**
      * @param amount the amount of quizzes to get
      * @param category the category of the questions
-     * @param type
      * @return an array of quizzes
      * @throws Exception
      */

@@ -2,6 +2,9 @@ package com.company;
 
 import java.util.Scanner;
 
+/**
+ * Quiz game console program
+ */
 public class QuizGame {
     private final QuizProvider provider;
     private final Scanner scanner;
