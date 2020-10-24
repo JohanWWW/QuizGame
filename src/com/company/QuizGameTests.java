@@ -19,7 +19,7 @@ public class QuizGameTests {
         IQuizApiController fakeController = createFakeQuizApiController("testData/test_response.json");
 
         // Act
-        QuizRootDto responseQuizRoot = fakeController.getQuizzes(0, 0);
+        QuizRootDto responseQuizRoot = fakeController.getQuizzes(0, 0); // <- the arguments are ignored
         QuizDto[] responseQuizzes = responseQuizRoot.getResults();
 
         // Assert
@@ -69,7 +69,7 @@ public class QuizGameTests {
         var provider = new QuizProvider(fakeController);
 
         // Act
-        Quiz[] quizzes = provider.getQuizzes(0, 0);
+        Quiz[] quizzes = provider.getQuizzes(0, 0); // <- the arguments are ignored
 
         // Assert
         assertQuiz(quizzes[0],
