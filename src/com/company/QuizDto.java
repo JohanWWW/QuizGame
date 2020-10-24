@@ -15,6 +15,11 @@ public class QuizDto {
     @SerializedName("incorrect_answers")
     private String[] incorrectAnswers;
 
+    // Instantiated by reflection
+    private QuizDto() {
+
+    }
+
     public String getCategory() {
         return category;
     }

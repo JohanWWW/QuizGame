@@ -10,6 +10,11 @@ public class QuizRootDto {
     private int responseCode;
     private QuizDto[] results;
 
+    // Instantiated by reflection
+    private QuizRootDto() {
+
+    }
+
     public int getResponseCode() {
         return responseCode;
     }
