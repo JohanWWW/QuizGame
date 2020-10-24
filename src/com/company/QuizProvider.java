@@ -22,10 +22,10 @@ public class QuizProvider {
      * @throws Exception
      */
     public Quiz[] getQuizzes(int amount, int category) throws Exception {
-        QuizRootResponseModel responseModel = controller.getQuizzes(amount, category);
+        QuizRootDto responseModel = controller.getQuizzes(amount, category);
 
         List<Quiz> mappedQuizzes = new ArrayList<>();
-        for (QuizResponseModel quizDto: responseModel.getResults()) {
+        for (QuizDto quizDto: responseModel.getResults()) {
             List<String> choices = new ArrayList<>();
             choices.add(quizDto.getCorrectAnswer());
             choices.addAll(Arrays.asList(quizDto.getIncorrectAnswers()));

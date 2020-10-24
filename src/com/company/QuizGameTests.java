@@ -17,8 +17,8 @@ public class QuizGameTests {
         var fakeController = new FakeQuizApiController("testData/test_response.json");
 
         // Act
-        QuizRootResponseModel responseQuizRoot = fakeController.getQuizzes(0, 0);
-        QuizResponseModel[] responseQuizzes = responseQuizRoot.getResults();
+        QuizRootDto responseQuizRoot = fakeController.getQuizzes(0, 0);
+        QuizDto[] responseQuizzes = responseQuizRoot.getResults();
 
         // Assert
         assertEquals(0, responseQuizRoot.getResponseCode());
@@ -48,7 +48,7 @@ public class QuizGameTests {
                 "AB&#039; + AB");
     }
 
-    private void assertQuizResponse(QuizResponseModel response, String... expectedValues) {
+    private void assertQuizResponse(QuizDto response, String... expectedValues) {
         assertEquals(expectedValues[0], response.getCategory());
         assertEquals(expectedValues[1], response.getType());
         assertEquals(expectedValues[2], response.getDifficulty());
@@ -68,7 +68,7 @@ class FakeQuizApiController implements IQuizApiController {
         jsonString = Files.readString(Path.of(testFilePath));
     }
 
-    public QuizRootResponseModel getQuizzes(int amount, int category) {
-        return new Gson().fromJson(jsonString, QuizRootResponseModel.class);
+    public QuizRootDto getQuizzes(int amount, int category) {
+        return new Gson().fromJson(jsonString, QuizRootDto.class);
     }
 }

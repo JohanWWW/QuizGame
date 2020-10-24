@@ -1,17 +1,20 @@
 package com.company;
 
+import com.google.gson.annotations.SerializedName;
+
 /**
  * The quiz root dto
  */
-public class QuizRootResponseModel {
+public class QuizRootDto {
+    @SerializedName("response_code")
     private int responseCode;
-    private QuizResponseModel[] results;
+    private QuizDto[] results;
 
     public int getResponseCode() {
         return responseCode;
     }
 
-    public QuizResponseModel[] getResults() {
+    public QuizDto[] getResults() {
         return results;
     }
 }

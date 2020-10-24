@@ -5,7 +5,7 @@ import com.google.gson.annotations.SerializedName;
 /**
  * The quiz response dto
  */
-public class QuizResponseModel {
+public class QuizDto {
     private String category;
     private String type;
     private String difficulty;

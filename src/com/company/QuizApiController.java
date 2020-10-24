@@ -1,9 +1,7 @@
 package com.company;
 
 import com.google.gson.Gson;
-import com.sun.jdi.request.ExceptionRequest;
 
-import java.io.IOException;
 import java.net.URI;
 import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
@@ -26,7 +24,7 @@ public class QuizApiController implements IQuizApiController {
      * @return Quiz root dto
      * @throws Exception if request failed, if failed to parse json
      */
-    public QuizRootResponseModel getQuizzes(int amount, int category) throws Exception {
+    public QuizRootDto getQuizzes(int amount, int category) throws Exception {
         HttpRequest request = HttpRequest.newBuilder()
                 .uri(URI.create(String.format("https://opentdb.com/api.php?amount=%s&category=%s&type=multiple", amount, category)))
                 .GET()
@@ -41,8 +39,8 @@ public class QuizApiController implements IQuizApiController {
         return deserializeJson(response.body());
     }
 
-    private QuizRootResponseModel deserializeJson(String jsonString) {
+    private QuizRootDto deserializeJson(String jsonString) {
         Gson gson = new Gson();
-        return gson.fromJson(jsonString, QuizRootResponseModel.class);
+        return gson.fromJson(jsonString, QuizRootDto.class);
     }
 }
