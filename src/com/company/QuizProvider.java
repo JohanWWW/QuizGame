@@ -21,8 +21,8 @@ public class QuizProvider {
      * @return an array of quizzes
      * @throws Exception
      */
-    public Quiz[] getQuizzes(int amount, int category, String type) throws Exception {
-        QuizRootResponseModel responseModel = controller.getQuizzes(amount, category, type);
+    public Quiz[] getQuizzes(int amount, int category) throws Exception {
+        QuizRootResponseModel responseModel = controller.getQuizzes(amount, category);
 
         List<Quiz> mappedQuizzes = new ArrayList<>();
         for (QuizResponseModel quizDto: responseModel.getResults()) {

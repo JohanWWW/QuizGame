@@ -23,13 +23,12 @@ public class QuizApiController implements IQuizApiController {
      * Fetches quizzes from server
      * @param amount amount of quizzes
      * @param category the category of the question
-     * @param type
      * @return Quiz root dto
      * @throws Exception if request failed, if failed to parse json
      */
-    public QuizRootResponseModel getQuizzes(int amount, int category, String type) throws Exception {
+    public QuizRootResponseModel getQuizzes(int amount, int category) throws Exception {
         HttpRequest request = HttpRequest.newBuilder()
-                .uri(URI.create(String.format("https://opentdb.com/api.php?amount=%s&category=%s&type=%s", amount, category, type)))
+                .uri(URI.create(String.format("https://opentdb.com/api.php?amount=%s&category=%s&type=multiple", amount, category)))
                 .GET()
                 .build();
 

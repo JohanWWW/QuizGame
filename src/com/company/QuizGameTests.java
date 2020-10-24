@@ -17,7 +17,7 @@ public class QuizGameTests {
         var fakeController = new FakeQuizApiController("testData/test_response.json");
 
         // Act
-        QuizRootResponseModel responseQuizRoot = fakeController.getQuizzes(0, 0, null);
+        QuizRootResponseModel responseQuizRoot = fakeController.getQuizzes(0, 0);
         QuizResponseModel[] responseQuizzes = responseQuizRoot.getResults();
 
         // Assert
@@ -68,7 +68,7 @@ class FakeQuizApiController implements IQuizApiController {
         jsonString = Files.readString(Path.of(testFilePath));
     }
 
-    public QuizRootResponseModel getQuizzes(int amount, int category, String type) throws Exception {
+    public QuizRootResponseModel getQuizzes(int amount, int category) {
         return new Gson().fromJson(jsonString, QuizRootResponseModel.class);
     }
 }

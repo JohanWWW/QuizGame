@@ -17,7 +17,7 @@ public class QuizGame {
 
         Quiz[] quizzes;
         try {
-            quizzes = provider.getQuizzes(amountOfQuizzes, 18, "multiple");
+            quizzes = provider.getQuizzes(amountOfQuizzes, 18);
         } catch (Exception e) {
             e.printStackTrace();
             return;
