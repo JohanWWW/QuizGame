@@ -1,12 +1,16 @@
 package com.company;
 
+import com.google.gson.annotations.SerializedName;
+
 public class QuizResponseModel {
     private String category;
     private String type;
     private String difficulty;
     private String question;
+    @SerializedName("correct_answer")
     private String correctAnswer;
-    private String[] incorrectAnswer;
+    @SerializedName("incorrect_answers")
+    private String[] incorrectAnswers;
 
     public String getCategory() {
         return category;
@@ -28,7 +32,7 @@ public class QuizResponseModel {
         return correctAnswer;
     }
 
-    public String[] getIncorrectAnswer() {
-        return incorrectAnswer;
+    public String[] getIncorrectAnswers() {
+        return incorrectAnswers;
     }
 }
