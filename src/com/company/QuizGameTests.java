@@ -16,7 +16,7 @@ public class QuizGameTests {
     @Test
     void apiControllerGetQuizzesReturnsCorrectObject() throws Exception {
         // Arrange
-        var fakeController = new FakeQuizApiController("testData/test_response.json");
+        IQuizApiController fakeController = createFakeQuizApiController("testData/test_response.json");
 
         // Act
         QuizRootDto responseQuizRoot = fakeController.getQuizzes(0, 0);
@@ -65,7 +65,7 @@ public class QuizGameTests {
     @Test
     void quizProviderGetQuizzesReturnsCorrectObject() throws Exception {
         // Arrange
-        var fakeController = new FakeQuizApiController("testData/test_response.json");
+        IQuizApiController fakeController = createFakeQuizApiController("testData/test_response.json");
         var provider = new QuizProvider(fakeController);
 
         // Act
@@ -121,16 +121,15 @@ public class QuizGameTests {
             assertTrue(Arrays.asList(quiz.getChoices()).contains(expectedChoice));
         }
     }
-}
 
-class FakeQuizApiController implements IQuizApiController {
-    private final String jsonString;
-
-    public FakeQuizApiController(String testFilePath) throws IOException {
-        jsonString = Files.readString(Path.of(testFilePath));
-    }
-
-    public QuizRootDto getQuizzes(int amount, int category) {
-        return new Gson().fromJson(jsonString, QuizRootDto.class);
+    private IQuizApiController createFakeQuizApiController(String testFilePath) {
+        return (amount, category) -> {
+            try {
+                String jsonString = Files.readString(Path.of(testFilePath));
+                return new Gson().fromJson(jsonString, QuizRootDto.class);
+            } catch (IOException e) {
+                throw new HttpRequestException("Something fake happened", e);
+            }
+        };
     }
 }
