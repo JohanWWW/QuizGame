@@ -24,15 +24,22 @@ public class QuizProvider {
      * @throws QuizProviderFailedException if failed to provide quizzes due to an underlying cause
      */
     public Quiz[] getQuizzes(int amount, int category) throws QuizProviderFailedException {
-        QuizRootDto responseModel;
+        QuizRootDto responseRootDto;
         try {
-            responseModel = controller.getQuizzes(amount, category);
+            responseRootDto = controller.getQuizzes(amount, category);
         } catch (HttpRequestException | HttpResponseNotOkException e) {
             throw new QuizProviderFailedException(e.getMessage(), e);
         }
+        return map(responseRootDto.getResults());
+    }
 
+    private String decodeUTF8(String encodedString) {
+        return URLDecoder.decode(encodedString, StandardCharsets.UTF_8);
+    }
+
+    private Quiz[] map(QuizDto[] dtos) {
         List<Quiz> mappedQuizzes = new ArrayList<>();
-        for (QuizDto quizDto: responseModel.getResults()) {
+        for (QuizDto quizDto: dtos) {
             List<String> choices = new ArrayList<>();
 
             String question = decodeUTF8(quizDto.getQuestion());
@@ -49,10 +56,6 @@ public class QuizProvider {
         }
 
         return mappedQuizzes.toArray(Quiz[]::new);
-    }
-
-    private String decodeUTF8(String encodedString) {
-        return URLDecoder.decode(encodedString, StandardCharsets.UTF_8);
     }
 
     private void scrambleChoices(List<String> quizzes) {
