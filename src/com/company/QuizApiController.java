@@ -9,7 +9,7 @@ import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
 
-public class QuizApiController {
+public class QuizApiController implements IQuizApiController{
     private final HttpClient client;
 
     public QuizApiController() {
