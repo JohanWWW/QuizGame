@@ -17,7 +17,7 @@
       "category": "Science%3A%20Computers",
       "type": "multiple",
       "difficulty": "hard",
-      "question": "According%20to%20DeMorgans's%20Theorem%2C%20the%20Boolean%20expression%20(AB)'%20is%20equivalent%20to%3A",
+      "question": "According%20to%20DeMorgan's%20Theorem%2C%20the%20Boolean%20expression%20(AB)'%20is%20equivalent%20to%3A",
       "correct_answer": "A'%20%2B%20B'",
       "incorrect_answers": [
         "A'B%20%2B%20B'",

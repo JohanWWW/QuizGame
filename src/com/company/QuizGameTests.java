@@ -6,8 +6,10 @@ import org.junit.jupiter.api.Test;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.util.Arrays;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class QuizGameTests {
 
@@ -40,7 +42,7 @@ public class QuizGameTests {
                 "Science%3A%20Computers",
                 "multiple",
                 "hard",
-                "According%20to%20DeMorgans's%20Theorem%2C%20the%20Boolean%20expression%20(AB)'%20is%20equivalent%20to%3A",
+                "According%20to%20DeMorgan's%20Theorem%2C%20the%20Boolean%20expression%20(AB)'%20is%20equivalent%20to%3A",
                 "A'%20%2B%20B'",
                 // Incorrect answers
                 "A'B%20%2B%20B'",
@@ -114,10 +116,10 @@ public class QuizGameTests {
         assertEquals(expectedValues[0], quiz.getQuestion());
         assertEquals(expectedValues[1], quiz.getCorrectAnswer());
 
-        assertEquals(expectedValues[2], quiz.getChoices()[0]);
-        assertEquals(expectedValues[3], quiz.getChoices()[1]);
-        assertEquals(expectedValues[4], quiz.getChoices()[2]);
-        assertEquals(expectedValues[5], quiz.getChoices()[3]);
+        for (int i = 2; i <= 5; i++) {
+            String expectedChoice = expectedValues[i];
+            assertTrue(Arrays.asList(quiz.getChoices()).contains(expectedChoice));
+        }
     }
 }
 
