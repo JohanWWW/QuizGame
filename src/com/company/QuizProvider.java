@@ -43,6 +43,8 @@ public class QuizProvider {
 
             choices.add(correctAnswer);
             choices.addAll(incorrectAnswers);
+            scrambleChoices(choices);
+
             mappedQuizzes.add(new Quiz(question, correctAnswer, choices.toArray(String[]::new)));
         }
 
@@ -51,5 +53,16 @@ public class QuizProvider {
 
     private String decodeUTF8(String encodedString) {
         return URLDecoder.decode(encodedString, StandardCharsets.UTF_8);
+    }
+
+    private void scrambleChoices(List<String> quizzes) {
+        for (int i = 0; i < quizzes.size(); i++) {
+            int randomIndex = (int)(Math.random() * quizzes.size());
+
+            // Swap
+            String temp = quizzes.get(randomIndex);
+            quizzes.set(randomIndex, quizzes.get(i));
+            quizzes.set(i, temp);
+        }
     }
 }
