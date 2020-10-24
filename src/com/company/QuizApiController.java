@@ -3,7 +3,6 @@ package com.company;
 import com.google.gson.Gson;
 
 import java.io.IOException;
-import java.io.SyncFailedException;
 import java.net.URI;
 import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
@@ -20,11 +19,7 @@ public class QuizApiController implements IQuizApiController {
     }
 
     /**
-     * Fetches quizzes from server
-     * @param amount amount of quizzes
-     * @param category the category of the question
-     * @return Quiz root dto
-     * @throws Exception if request failed, if failed to parse json
+     * {@inheritDoc}
      */
     public QuizRootDto getQuizzes(int amount, int category) throws HttpRequestException, HttpResponseNotOkException {
         HttpRequest request = HttpRequest.newBuilder()

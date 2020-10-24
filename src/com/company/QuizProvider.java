@@ -18,7 +18,7 @@ public class QuizProvider {
      * @param amount the amount of quizzes to get
      * @param category the category of the questions
      * @return an array of quizzes
-     * @throws Exception
+     * @throws QuizProviderFailedException if failed to provide quizzes due to an underlying cause
      */
     public Quiz[] getQuizzes(int amount, int category) throws QuizProviderFailedException {
         QuizRootDto responseModel;
