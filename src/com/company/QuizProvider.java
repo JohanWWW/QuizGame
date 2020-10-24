@@ -1,8 +1,11 @@
 package com.company;
 
+import java.net.URLDecoder;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class QuizProvider {
     private final IQuizApiController controller;
@@ -31,11 +34,22 @@ public class QuizProvider {
         List<Quiz> mappedQuizzes = new ArrayList<>();
         for (QuizDto quizDto: responseModel.getResults()) {
             List<String> choices = new ArrayList<>();
-            choices.add(quizDto.getCorrectAnswer());
-            choices.addAll(Arrays.asList(quizDto.getIncorrectAnswers()));
-            mappedQuizzes.add(new Quiz(quizDto.getQuestion(), quizDto.getCorrectAnswer(), choices.toArray(String[]::new)));
+
+            String question = decodeUTF8(quizDto.getQuestion());
+            String correctAnswer = decodeUTF8(quizDto.getCorrectAnswer());
+            List<String> incorrectAnswers = Arrays.stream(quizDto.getIncorrectAnswers())
+                    .map(this::decodeUTF8)
+                    .collect(Collectors.toList());
+
+            choices.add(correctAnswer);
+            choices.addAll(incorrectAnswers);
+            mappedQuizzes.add(new Quiz(question, correctAnswer, choices.toArray(String[]::new)));
         }
 
         return mappedQuizzes.toArray(Quiz[]::new);
+    }
+
+    private String decodeUTF8(String encodedString) {
+        return URLDecoder.decode(encodedString, StandardCharsets.UTF_8);
     }
 }
