@@ -47,7 +47,7 @@ public class QuizGameEngine {
         return round == quizzes.length;
     }
 
-    private int getQuizLength() {
+    public int getQuizLength() {
         return quizzes.length;
     }
 
