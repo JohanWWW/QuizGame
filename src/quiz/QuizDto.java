@@ -6,14 +6,14 @@ import com.google.gson.annotations.SerializedName;
  * The quiz response dto
  */
 class QuizDto {
-    private String category;
-    private String type;
-    private String difficulty;
-    private String question;
+    private final String category;
+    private final String type;
+    private final String difficulty;
+    private final String question;
     @SerializedName("correct_answer")
-    private String correctAnswer;
+    private final String correctAnswer;
     @SerializedName("incorrect_answers")
-    private String[] incorrectAnswers;
+    private final String[] incorrectAnswers;
 
     QuizDto(String category, String type, String difficulty, String question, String correctAnswer, String[] incorrectAnswers) {
         this.category = category;

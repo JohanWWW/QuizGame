@@ -1,7 +1,5 @@
 package quiz;
 
-import java.util.List;
-
 /**
  * Keeps track of game states
  */

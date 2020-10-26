@@ -1,9 +1,9 @@
 package quiz;
 
 class Quiz {
-    private String question;
-    private String correctAnswer;
-    private String[] choices;
+    private final String question;
+    private final String correctAnswer;
+    private final String[] choices;
 
     public Quiz(String question, String correctAnswer, String[] choices) {
         this.question = question;

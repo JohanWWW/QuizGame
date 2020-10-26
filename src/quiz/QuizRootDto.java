@@ -7,12 +7,12 @@ import com.google.gson.annotations.SerializedName;
  */
 class QuizRootDto {
     @SerializedName("response_code")
-    private int responseCode;
-    private QuizDto[] results;
+    private final int responseCode;
+    private final QuizDto[] results;
 
-    // Instantiated by reflection
-    private QuizRootDto() {
-
+    QuizRootDto(int responseCode, QuizDto[] results) {
+        this.responseCode = responseCode;
+        this.results = results;
     }
 
     public int getResponseCode() {
