@@ -1,6 +1,7 @@
 package com.company;
 
 import com.google.gson.Gson;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import java.io.IOException;
@@ -14,6 +15,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 public class QuizGameTests {
 
     @Test
+    @DisplayName("Validate that the Quiz controller deserializes response data to dto:s correctly")
     void apiControllerGetQuizzesReturnsCorrectObject() throws Exception {
         // Arrange
         IQuizApiController fakeController = createFakeQuizApiController("testData/test_response.json");
@@ -63,6 +65,7 @@ public class QuizGameTests {
     }
 
     @Test
+    @DisplayName("Validate that the Quiz provider provides quizzes that are correctly mapped from the dto:s")
     void quizProviderGetQuizzesReturnsCorrectObject() throws Exception {
         // Arrange
         IQuizApiController fakeController = createFakeQuizApiController("testData/test_response.json");
