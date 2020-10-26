@@ -113,10 +113,10 @@ public class QuizGameTests {
                 "!\"#¤%&/()=?´`^*@£$€{[]}\\~åäöÅÄÖ",
                 "None of the above",
                 new String[] {
-                    "åäöÅÄÖ",
+                    "None of the above",
                     "åæøÅÆØ",
                     "áÁéÉíÍóÓúÚýÝþÞðÐöÖ",
-                    "None of the above"
+                    "åäöÅÄÖ"
                 }),
             quizzes[2]);
     }
@@ -184,11 +184,7 @@ public class QuizGameTests {
     private void assertQuizEquals(Quiz expectedQuiz, Quiz actualQuiz) {
         assertEquals(expectedQuiz.getQuestion(), actualQuiz.getQuestion());
         assertEquals(expectedQuiz.getCorrectAnswer(), actualQuiz.getCorrectAnswer());
-
-        for (String choice: expectedQuiz.getChoices()) {
-            // Contains because the array is scrambled
-            assertTrue(Arrays.asList(actualQuiz.getChoices()).contains(choice));
-        }
+        assertArrayEquals(expectedQuiz.getChoices(), actualQuiz.getChoices());
     }
 
     private IQuizApiController createFakeQuizApiController(String testFilePath) {
