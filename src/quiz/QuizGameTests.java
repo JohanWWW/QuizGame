@@ -124,6 +124,7 @@ class QuizGameTests {
     }
 
     @Test
+    @DisplayName("Validate that game engine correctly keeps track of the score")
     public void gameEngineGetScoreIsCorrect() throws QuizProviderFailedException {
         // Arrange
         IQuizApiController fakeController = createFakeQuizApiController("testData/test_response.json");
@@ -145,6 +146,7 @@ class QuizGameTests {
     }
 
     @Test
+    @DisplayName("Validate that game engine reports game over when all questions are answered")
     public void gameEngineGameIsOverWhenAllQuestionsAnswered() throws QuizProviderFailedException {
         // Arrange
         IQuizApiController fakeController = createFakeQuizApiController("testData/test_response.json");
@@ -161,6 +163,7 @@ class QuizGameTests {
     }
 
     @Test
+    @DisplayName("Validate that game engine doesn't report game over when not all questions are answered")
     public void gameEngineGameIsNotOverWhenAllQuestionsNotAnswered() throws QuizProviderFailedException {
         // Arrange
         IQuizApiController fakeController = createFakeQuizApiController("testData/test_response.json");
