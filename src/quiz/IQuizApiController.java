@@ -1,6 +1,6 @@
 package quiz;
 
-public interface IQuizApiController {
+interface IQuizApiController {
     /**
      * Fetches quizzes over HTTP
      * @param amount amount of quizzes

@@ -12,7 +12,7 @@ import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-public class QuizGameTests {
+class QuizGameTests {
 
     @Test
     @DisplayName("Validate that the Quiz controller deserializes response data to dto:s correctly")

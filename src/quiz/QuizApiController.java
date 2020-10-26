@@ -11,7 +11,7 @@ import java.net.http.HttpResponse;
 /**
  * Controller for fetching quizzes from server
  */
-public class QuizApiController implements IQuizApiController {
+class QuizApiController implements IQuizApiController {
     private final HttpClient client;
 
     public QuizApiController() {

@@ -1,6 +1,6 @@
 package quiz;
 
-public class Quiz {
+class Quiz {
     private String question;
     private String correctAnswer;
     private String[] choices;
