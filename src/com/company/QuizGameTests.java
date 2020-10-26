@@ -8,6 +8,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.Arrays;
+import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -118,6 +119,57 @@ public class QuizGameTests {
                     "None of the above"
                 }),
             quizzes[2]);
+    }
+
+    @Test
+    public void gameEngineGetScoreIsCorrect() throws QuizProviderFailedException {
+        // Arrange
+        IQuizApiController fakeController = createFakeQuizApiController("testData/test_response.json");
+        var provider = new QuizProvider(fakeController);
+        var quizGameEngine = new QuizGameEngine(0, 0, provider);
+
+        // Act
+        int answerIndex1 = List.of(quizGameEngine.getChoices()).indexOf("Java"); // Correct
+        quizGameEngine.nextRound(quizGameEngine.isCorrectAnswer(answerIndex1));
+
+        int answerIndex2 = List.of(quizGameEngine.getChoices()).indexOf("A'B + B'"); // Incorrect
+        quizGameEngine.nextRound(quizGameEngine.isCorrectAnswer(answerIndex2));
+
+        int answerIndex3 = List.of(quizGameEngine.getChoices()).indexOf("None of the above"); // Correct
+        quizGameEngine.nextRound(quizGameEngine.isCorrectAnswer(answerIndex3));
+
+        // Assert
+        assertEquals(2, quizGameEngine.getScore());
+    }
+
+    @Test
+    public void gameEngineGameIsOverWhenAllQuestionsAnswered() throws QuizProviderFailedException {
+        // Arrange
+        IQuizApiController fakeController = createFakeQuizApiController("testData/test_response.json");
+        var provider = new QuizProvider(fakeController);
+        var quizGameEngine = new QuizGameEngine(0, 0, provider);
+
+        // Act
+        quizGameEngine.nextRound(false);
+        quizGameEngine.nextRound(false);
+        quizGameEngine.nextRound(false);
+
+        // Assert
+        assertTrue(quizGameEngine.isGameOver());
+    }
+
+    @Test
+    public void gameEngineGameIsNotOverWhenAllQuestionsNotAnswered() throws QuizProviderFailedException {
+        // Arrange
+        IQuizApiController fakeController = createFakeQuizApiController("testData/test_response.json");
+        var provider = new QuizProvider(fakeController);
+        var quizGameEngine = new QuizGameEngine(0, 0, provider);
+
+        // Act
+        quizGameEngine.nextRound(false);
+
+        // Assert
+        assertFalse(quizGameEngine.isGameOver());
     }
 
     private void assertQuizDtoEquals(QuizDto expectedDto, QuizDto actualDto) {

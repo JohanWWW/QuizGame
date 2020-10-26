@@ -23,13 +23,24 @@ public class QuizGameEngine {
         return getQuizOfCurrentRound().getChoices();
     }
 
-    public boolean submitAnswer(int answerIndex) {
-        if (getCorrectAnswer().equals(getQuizOfCurrentRound().getChoices()[0])) {
-            score++;
-            return true;
-        }
+    public String getCorrectAnswer() {
+        return getQuizOfCurrentRound().getCorrectAnswer();
+    }
+
+    public boolean isCorrectAnswer(int answerIndex) {
+        return getCorrectAnswer().equals(
+                getQuizOfCurrentRound().getChoices()[answerIndex]);
+    }
+
+    public void nextRound(boolean iterateScore) {
         round++;
-        return false;
+        if (iterateScore) {
+            score++;
+        }
+    }
+
+    public int getScore() {
+        return score;
     }
 
     public boolean isGameOver() {
@@ -42,9 +53,5 @@ public class QuizGameEngine {
 
     private Quiz getQuizOfCurrentRound() {
         return quizzes[round];
-    }
-
-    private String getCorrectAnswer() {
-        return getQuizOfCurrentRound().getCorrectAnswer();
     }
 }
