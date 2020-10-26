@@ -8,7 +8,6 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.Arrays;
-import java.util.function.Function;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -28,7 +27,7 @@ public class QuizGameTests {
         assertEquals(0, responseQuizRoot.getResponseCode());
 
         // Quiz 1
-        assertQuizDto(new QuizDto(
+        assertQuizDtoEquals(new QuizDto(
                 "Science%3A%20Computers",
                 "multiple",
                 "medium",
@@ -43,7 +42,7 @@ public class QuizGameTests {
             responseQuizzes[0]);
 
         // Quiz 2
-        assertQuizDto(new QuizDto(
+        assertQuizDtoEquals(new QuizDto(
                 "Science%3A%20Computers",
                 "multiple",
                 "hard",
@@ -58,7 +57,7 @@ public class QuizGameTests {
             responseQuizzes[1]);
 
         // Quiz 3
-        assertQuizDto(new QuizDto(
+        assertQuizDtoEquals(new QuizDto(
                 "Science%3A%20Computers",
                 "multiple",
                 "hard",
@@ -85,7 +84,7 @@ public class QuizGameTests {
 
         // Assert
         // Quiz 1
-        assertQuiz(new Quiz(
+        assertQuizEquals(new Quiz(
                 "Which programming language was developed by Sun Microsystems in 1995?",
                 "Java",
                 new String[] {
@@ -97,7 +96,7 @@ public class QuizGameTests {
             quizzes[0]);
 
         // Quiz 2
-        assertQuiz(new Quiz(
+        assertQuizEquals(new Quiz(
                 "According to DeMorgan's Theorem, the Boolean expression (AB)' is equivalent to:",
                 "A' + B'",
                 new String[] {
@@ -109,7 +108,7 @@ public class QuizGameTests {
             quizzes[1]);
 
         // Quiz 3
-        assertQuiz(new Quiz(
+        assertQuizEquals(new Quiz(
                 "!\"#¤%&/()=?´`^*@£$€{[]}\\~åäöÅÄÖ",
                 "None of the above",
                 new String[] {
@@ -121,21 +120,21 @@ public class QuizGameTests {
             quizzes[2]);
     }
 
-    private void assertQuizDto(QuizDto expectedDto, QuizDto actualDto) {
+    private void assertQuizDtoEquals(QuizDto expectedDto, QuizDto actualDto) {
         assertEquals(expectedDto.getCategory(), actualDto.getCategory());
         assertEquals(expectedDto.getType(), actualDto.getType());
         assertEquals(expectedDto.getDifficulty(), actualDto.getDifficulty());
         assertEquals(expectedDto.getQuestion(), actualDto.getQuestion());
         assertEquals(expectedDto.getCorrectAnswer(), actualDto.getCorrectAnswer());
-
         assertArrayEquals(expectedDto.getIncorrectAnswers(), actualDto.getIncorrectAnswers());
     }
 
-    private void assertQuiz(Quiz expectedQuiz, Quiz actualQuiz) {
+    private void assertQuizEquals(Quiz expectedQuiz, Quiz actualQuiz) {
         assertEquals(expectedQuiz.getQuestion(), actualQuiz.getQuestion());
         assertEquals(expectedQuiz.getCorrectAnswer(), actualQuiz.getCorrectAnswer());
 
         for (String choice: expectedQuiz.getChoices()) {
+            // Contains because the array is scrambled
             assertTrue(Arrays.asList(actualQuiz.getChoices()).contains(choice));
         }
     }
