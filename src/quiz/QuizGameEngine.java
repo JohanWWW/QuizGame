@@ -1,4 +1,4 @@
-package com.company;
+package quiz;
 
 public class QuizGameEngine {
     private final Quiz[] quizzes;

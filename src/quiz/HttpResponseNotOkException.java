@@ -1,4 +1,4 @@
-package com.company;
+package quiz;
 
 public class HttpResponseNotOkException extends Exception {
 

@@ -1,4 +1,4 @@
-package com.company;
+package quiz;
 
 import com.google.gson.Gson;
 

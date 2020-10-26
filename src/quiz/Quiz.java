@@ -1,4 +1,4 @@
-package com.company;
+package quiz;
 
 public class Quiz {
     private String question;
