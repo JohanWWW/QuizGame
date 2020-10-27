@@ -17,7 +17,7 @@ public class Main {
 
         QuizGameEngine game = null;
         try {
-            game = new QuizGameEngine(quizCount, 18);
+            game = new QuizGameEngine(quizCount);
         } catch (QuizProviderFailedException e) {
             e.printStackTrace();
             System.exit(0);

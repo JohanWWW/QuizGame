@@ -11,24 +11,22 @@ public class QuizGameEngine {
     /**
      * Creates a new game with given settings
      * @param count amount of quizzes to create
-     * @param category category of the quizzes
      * @throws QuizProviderFailedException if failed to provide quizzes due to an underlying cause
      */
-    public QuizGameEngine(int count, int category) throws QuizProviderFailedException {
+    public QuizGameEngine(int count) throws QuizProviderFailedException {
         var quizProvider = new QuizProvider(new QuizApiController());
-        quizzes = quizProvider.getQuizzes(count, category);
+        quizzes = quizProvider.getQuizzes(count);
         scrambleChoices();
     }
 
     /**
      * Creates a new game with given settings and provider
      * @param count amount of quizzes to create
-     * @param category category of the quizzes
      * @param quizProvider the provider to use
      * @throws QuizProviderFailedException if failed to provide quizzes due to an underlying cause
      */
-    QuizGameEngine(int count, int category, QuizProvider quizProvider) throws QuizProviderFailedException {
-        quizzes = quizProvider.getQuizzes(count, category);
+    QuizGameEngine(int count, QuizProvider quizProvider) throws QuizProviderFailedException {
+        quizzes = quizProvider.getQuizzes(count);
         scrambleChoices();
     }
 

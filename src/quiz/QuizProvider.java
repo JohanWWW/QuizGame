@@ -19,14 +19,13 @@ class QuizProvider {
 
     /**
      * @param amount the amount of quizzes to get
-     * @param category the category of the questions
      * @return an array of quizzes
      * @throws QuizProviderFailedException if failed to provide quizzes due to an underlying cause
      */
-    public Quiz[] getQuizzes(int amount, int category) throws QuizProviderFailedException {
+    public Quiz[] getQuizzes(int amount) throws QuizProviderFailedException {
         QuizRootDto responseRootDto;
         try {
-            responseRootDto = controller.getQuizzes(amount, category);
+            responseRootDto = controller.getQuizzes(amount);
         } catch (HttpRequestException | HttpResponseNotOkException e) {
             throw new QuizProviderFailedException(e.getMessage(), e);
         }

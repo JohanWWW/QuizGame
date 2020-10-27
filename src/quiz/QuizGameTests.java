@@ -23,7 +23,7 @@ class QuizGameTests {
         IQuizApiController fakeController = createFakeQuizApiController("testData/test_response.json");
 
         // Act
-        QuizRootDto responseQuizRoot = fakeController.getQuizzes(0, 0); // <- the arguments are ignored
+        QuizRootDto responseQuizRoot = fakeController.getQuizzes(0); // <- the argument is ignored
         QuizDto[] responseQuizzes = responseQuizRoot.getResults();
 
         // Assert
@@ -83,7 +83,7 @@ class QuizGameTests {
         var provider = new QuizProvider(fakeController);
 
         // Act
-        Quiz[] quizzes = provider.getQuizzes(0, 0); // <- the arguments are ignored
+        Quiz[] quizzes = provider.getQuizzes(0); // <- the argument is ignored
 
         // Assert
         // Quiz 1
@@ -129,7 +129,7 @@ class QuizGameTests {
         // Arrange
         IQuizApiController fakeController = createFakeQuizApiController("testData/test_response.json");
         var provider = new QuizProvider(fakeController);
-        var quizGameEngine = new QuizGameEngine(0, 0, provider);
+        var quizGameEngine = new QuizGameEngine(0, provider); // <- the amount argument is ignored
 
         // Act
         int answerIndex1 = List.of(quizGameEngine.getChoices()).indexOf("Java"); // Correct
@@ -151,7 +151,7 @@ class QuizGameTests {
         // Arrange
         IQuizApiController fakeController = createFakeQuizApiController("testData/test_response.json");
         var provider = new QuizProvider(fakeController);
-        var quizGameEngine = new QuizGameEngine(0, 0, provider);
+        var quizGameEngine = new QuizGameEngine(0, provider); // <- the amount argument is ignored
 
         // Act
         quizGameEngine.nextRound(false);
@@ -168,7 +168,7 @@ class QuizGameTests {
         // Arrange
         IQuizApiController fakeController = createFakeQuizApiController("testData/test_response.json");
         var provider = new QuizProvider(fakeController);
-        var quizGameEngine = new QuizGameEngine(0, 0, provider);
+        var quizGameEngine = new QuizGameEngine(0, provider); // <- the amount argument is ignored
 
         // Act
         quizGameEngine.nextRound(false);
@@ -193,7 +193,7 @@ class QuizGameTests {
     }
 
     private IQuizApiController createFakeQuizApiController(String testFilePath) {
-        return (amount, category) -> {
+        return amount -> {
             try {
                 String jsonString = Files.readString(Path.of(testFilePath));
                 return new Gson().fromJson(jsonString, QuizRootDto.class);
