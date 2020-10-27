@@ -10,7 +10,10 @@ public class Main {
     private static final Scanner scanner = new Scanner(System.in);
 
     public static void main(String[] args) {
+        System.out.println("Welcome!");
+
         int quizCount = promptUntilInteger("Please enter amount of quizzes: ", "Only integers allowed!");
+        System.out.println();
 
         QuizGameEngine game = null;
         try {
@@ -22,25 +25,31 @@ public class Main {
 
         while (!game.isGameOver()) {
             System.out.println(game.getQuestion());
-
-            for (int i = 0; i < game.getChoices().length; i++) {
-                System.out.printf("[%s]: %s\n", i, game.getChoices()[i]);
-            }
+            printChoices(game.getChoices());
 
             int choiceIndex = promptUntilIntegerRange(0, game.getChoices().length, "Please enter a choice: ");
-
             boolean answeredCorrectly = game.isCorrectAnswer(choiceIndex);
+
+            System.out.println();
+            System.out.printf("The correct answer is: \"%s\"\n", game.getCorrectAnswer());
 
             if (answeredCorrectly) System.out.println("You answered correctly!");
             else System.out.println("You answered incorrectly!");
 
-            System.out.printf("The correct answer is: \"%s\"\n", game.getCorrectAnswer());
             System.out.println();
 
             game.nextRound(answeredCorrectly);
         }
 
-        System.out.printf("Score: %s/%s\n", game.getScore(), game.getQuizLength());
+        System.out.printf("Score: %s of %s\n", game.getScore(), game.getQuizLength());
+
+        scanner.close();
+    }
+
+    private static void printChoices(String[] choices) {
+        for (int i = 0; i < choices.length; i++) {
+            System.out.printf("[%s]: %s\n", i, choices[i]);
+        }
     }
 
     private static int promptUntilInteger(String message, String messageOnFail) {
@@ -66,7 +75,7 @@ public class Main {
             if (value >= lower && value < upper) {
                 isInputAccepted = true;
             } else {
-                System.out.printf("Value does not fall between >=%s and <%s.\n", lower, upper);
+                System.out.printf("Value does not fall between %s and %s (exclusive)\n", lower, upper);
             }
         } while (!isInputAccepted);
 
